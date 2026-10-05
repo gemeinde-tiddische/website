@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────
+# Zentrale Gemeinde-Daten
+# Diese Datei ist über das CMS unter „Einstellungen“ bearbeitbar.
+# Änderungen wirken sich auf Fußzeile, Startseite und Kontaktseite aus.
+# ─────────────────────────────────────────────
+
+email: gemeinde@tiddische.de
+telefon: "+49 5366 969943"
+
+postadresse: |
+  Gemeinde Tiddische
+  Am Sportplatz 11
+  38473 Tiddische
+
+gemeindebuero:
+  adresse: Gorering 18, 38473 Tiddische
+  zeiten: Montag und Mittwoch, 8:00 – 11:00 Uhr
+
+sprechzeiten:
+  - ort: DGH Hoitlingen
+    zeit: Montag, 18:15 – 19:15 Uhr
+  - ort: Bürgerhaus Tiddische
+    zeit: Montag, 19:30 – 20:30 Uhr
+
+# Link zum öffentlichen Quellcode (nach Einrichtung der GitHub-Organisation anpassen)
+github: https://github.com/gemeinde-tiddische/website
