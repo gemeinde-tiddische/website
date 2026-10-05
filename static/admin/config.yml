@@ -1,0 +1,296 @@
+# ═══════════════════════════════════════════════════════════════
+# Sveltia CMS · Konfiguration
+# Gemeinde Tiddische – Inhaltsverwaltung
+#
+# WICHTIG vor dem ersten Einsatz (siehe EINRICHTUNG.md):
+#   1. "repo" auf die echte GitHub-Organisation/Repository anpassen
+#   2. "base_url" auf den eingerichteten OAuth-Worker setzen
+# ═══════════════════════════════════════════════════════════════
+
+backend:
+  name: github
+  repo: gemeinde-tiddische/website   # ← ANPASSEN
+  branch: main
+  base_url: https://sveltia-cms-auth.DEIN-WORKER.workers.dev   # ← ANPASSEN
+  commit_messages:
+    create: "Inhalt erstellt: {{collection}} – {{slug}}"
+    update: "Inhalt geändert: {{collection}} – {{slug}}"
+    delete: "Inhalt gelöscht: {{collection}} – {{slug}}"
+    uploadMedia: "Datei hochgeladen: {{path}}"
+    deleteMedia: "Datei gelöscht: {{path}}"
+
+site_url: https://www.gemeinde-tiddische.de
+display_url: https://www.gemeinde-tiddische.de
+logo_url: https://www.gemeinde-tiddische.de/images/wappen.png
+
+media_folder: static/images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  # ───────────────────────── Aktuelles ─────────────────────────
+  - name: aktuelles
+    label: Aktuelles
+    label_singular: Meldung
+    folder: content/aktuelles
+    filter: { field: title, pattern: '.+' }   # blendet _index.md aus
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { name: title, label: Überschrift, widget: string }
+      - { name: date, label: Datum der Veröffentlichung, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - name: bild
+        label: Bild (optional)
+        widget: image
+        required: false
+        hint: "z. B. ein Flyer oder Foto. Bitte möglichst unter 1 MB."
+      - name: bild_alt
+        label: Bildbeschreibung
+        widget: string
+        required: false
+        hint: "Bitte ausfüllen, wenn ein Bild gewählt wurde – kurze Beschreibung für Menschen, die das Bild nicht sehen können."
+      - name: pdf
+        label: PDF-Anhang (optional)
+        widget: file
+        required: false
+        media_folder: /static/pdfs/aktuelles
+        public_folder: /pdfs/aktuelles
+      - { name: pdf_titel, label: Beschriftung des PDF-Anhangs, widget: string, required: false, default: "Dokument herunterladen" }
+      - name: body
+        label: Inhalt
+        widget: markdown
+        hint: "Der Text der Meldung. Überschriften, Listen und Links sind möglich."
+
+  # ─────────────────────── Veranstaltungen ───────────────────────
+  - name: veranstaltungen
+    label: Veranstaltungen
+    label_singular: Veranstaltung
+    folder: content/veranstaltungen
+    filter: { field: title, pattern: '.+' }
+    create: true
+    delete: true
+    slug: "{{year}}-{{slug}}"
+    sortable_fields: [start, title]
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Name der Veranstaltung, widget: string }
+      - { name: date, label: Veröffentlicht am, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Datum, an dem dieser Eintrag erstellt wurde (für die Sortierung im RSS-Feed)." }
+      - name: start
+        label: Beginn
+        widget: datetime
+        format: "YYYY-MM-DDTHH:mm:ss"
+        hint: "Bei mehrtägigen Veranstaltungen ohne Uhrzeit: 00:00 eintragen."
+      - name: ende
+        label: Ende (optional)
+        widget: datetime
+        required: false
+        format: "YYYY-MM-DDTHH:mm:ss"
+      - { name: ort, label: Ort, widget: string, required: false, hint: "z. B. Bürgerhaus Tiddische" }
+      - { name: veranstalter, label: Veranstalter, widget: string, required: false }
+      - { name: bild, label: "Bild / Flyer (optional)", widget: image, required: false }
+      - { name: bild_alt, label: Bildbeschreibung, widget: string, required: false, hint: "Bitte ausfüllen, wenn ein Bild gewählt wurde." }
+      - name: pdf
+        label: PDF-Anhang (optional)
+        widget: file
+        required: false
+        media_folder: /static/pdfs/veranstaltungen
+        public_folder: /pdfs/veranstaltungen
+      - { name: pdf_titel, label: Beschriftung des PDF-Anhangs, widget: string, required: false, default: "Weitere Informationen (PDF)" }
+      - { name: body, label: Beschreibung, widget: markdown, required: false }
+
+  # ──────────────────────── Protokolle ────────────────────────
+  - name: protokolle
+    label: Sitzungsprotokolle
+    label_singular: Protokoll
+    folder: content/protokolle
+    filter: { field: title, pattern: '.+' }
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { name: title, label: Titel, widget: string, hint: "z. B. „Protokoll der 45. Gemeinderatssitzung“" }
+      - { name: date, label: Datum der Sitzung, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - name: pdf
+        label: Protokoll als PDF
+        widget: file
+        media_folder: /static/pdfs/protokolle
+        public_folder: /pdfs/protokolle
+        hint: "Bitte das genehmigte Protokoll als PDF hochladen."
+      - { name: body, label: Anmerkung (optional), widget: markdown, required: false }
+
+  # ───────────────────────── Satzungen ─────────────────────────
+  - name: satzungen
+    label: Satzungen
+    label_singular: Satzung
+    folder: content/satzungen
+    filter: { field: title, pattern: '.+' }
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    sortable_fields: [weight, title]
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Name der Satzung, widget: string }
+      - name: pdf
+        label: Satzung als PDF
+        widget: file
+        media_folder: /static/pdfs/satzungen
+        public_folder: /pdfs/satzungen
+      - { name: stand, label: "Stand (optional)", widget: string, required: false, hint: "z. B. „Stand: 14.12.2022“" }
+      - { name: weight, label: Reihenfolge, widget: number, default: 50, hint: "Kleinere Zahl = weiter oben in der Liste." }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Datum des Beschlusses oder der letzten Änderung." }
+      - { name: body, label: Anmerkung (optional), widget: markdown, required: false }
+
+  # ─────────────────────── Ratsmitglieder ───────────────────────
+  - name: ratsmitglieder
+    label: Ratsmitglieder
+    label_singular: Ratsmitglied
+    folder: content/ratsmitglieder
+    filter: { field: title, pattern: '.+' }
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    sortable_fields: [weight, title]
+    summary: "{{title}} ({{partei}})"
+    fields:
+      - { name: title, label: Name, widget: string }
+      - name: partei
+        label: Partei / Zugehörigkeit
+        widget: select
+        options: [SPD, CDU, parteilos]
+        default: parteilos
+      - { name: funktion, label: "Funktion (optional)", widget: string, required: false, hint: "z. B. Bürgermeister, 1. stv. Bürgermeisterin" }
+      - name: foto
+        label: Foto (optional)
+        widget: image
+        required: false
+        media_folder: /static/images/avatars
+        public_folder: /images/avatars
+        hint: "Möglichst quadratisch zugeschnitten. Ohne Foto wird ein Platzhalter angezeigt."
+      - { name: email, label: "E-Mail (optional)", widget: string, required: false, hint: "Nur dienstliche Adressen eintragen, keine privaten." }
+      - { name: telefon, label: "Telefon (optional)", widget: string, required: false, hint: "Nur dienstliche Nummern eintragen, keine privaten." }
+      - { name: weight, label: Reihenfolge, widget: number, default: 500, hint: "Kleinere Zahl = weiter vorne. Bürgermeister: 10, Stellvertretungen: 20/30, danach z. B. alphabetisch in Zehnerschritten." }
+
+  # ───────────────────────── Vereine ─────────────────────────
+  - name: vereine
+    label: Vereine
+    label_singular: Verein
+    folder: content/vereine
+    filter: { field: title, pattern: '.+' }
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    sortable_fields: [ortschaft, weight, title]
+    summary: "{{title}} ({{ortschaft}})"
+    fields:
+      - { name: title, label: Name des Vereins, widget: string }
+      - name: ortschaft
+        label: Ortschaft
+        widget: select
+        options: [Tiddische, Hoitlingen]
+      - { name: kontakt, label: "Ansprechperson (optional)", widget: string, required: false, hint: "z. B. „1. Vorsitzende Maxi Mustermann“. Bitte nur mit Einverständnis der Person veröffentlichen." }
+      - { name: telefon, label: "Telefon (optional)", widget: string, required: false }
+      - { name: email, label: "E-Mail (optional)", widget: string, required: false }
+      - { name: website, label: "Website (optional)", widget: string, required: false, hint: "Vollständige Adresse mit https://" }
+      - name: bild
+        label: Bild oder Logo (optional)
+        widget: image
+        required: false
+        media_folder: /static/images/vereinsbilder
+        public_folder: /images/vereinsbilder
+      - { name: weight, label: Reihenfolge, widget: number, default: 500, hint: "Kleinere Zahl = weiter oben in der Übersicht." }
+      - { name: body, label: "Vorstellungstext (optional)", widget: markdown, required: false, hint: "Erscheint auf der Detailseite des Vereins." }
+
+  # ─────────────────────────── Seiten ───────────────────────────
+  - name: seiten
+    label: Feste Seiten
+    files:
+      - name: startseite
+        label: Startseite (Begrüßungstext)
+        file: content/_index.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Begrüßungstext, widget: markdown }
+      - name: gemeinde
+        label: Die Gemeinde (Chronik)
+        file: content/gemeinde.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: untertitel, label: Untertitel, widget: string, required: false }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: dorfregion
+        label: Dorfregion
+        file: content/dorfregion.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: untertitel, label: Untertitel, widget: string, required: false }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: bauen
+        label: Bauen
+        file: content/bauen.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: kontakt
+        label: Kontakt
+        file: content/kontakt.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: gemeinderat
+        label: Gemeinderat (Einleitungstext)
+        file: content/gemeinderat/_index.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Einleitungstext, widget: markdown }
+      - name: impressum
+        label: Impressum
+        file: content/impressum.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: datenschutz
+        label: Datenschutzerklärung
+        file: content/datenschutz.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Inhalt, widget: markdown }
+      - name: barrierefreiheit
+        label: Erklärung zur Barrierefreiheit
+        file: content/barrierefreiheit.md
+        fields:
+          - { name: title, label: Überschrift, widget: string }
+          - { name: body, label: Inhalt, widget: markdown }
+
+  # ───────────────────────── Einstellungen ─────────────────────────
+  - name: einstellungen
+    label: Einstellungen
+    files:
+      - name: gemeinde
+        label: "Kontaktdaten & Zeiten (Fußzeile, Startseite)"
+        file: data/gemeinde.yaml
+        fields:
+          - { name: email, label: E-Mail-Adresse der Gemeinde, widget: string }
+          - { name: telefon, label: Telefonnummer, widget: string }
+          - { name: postadresse, label: Postadresse, widget: text }
+          - name: gemeindebuero
+            label: Gemeindebüro
+            widget: object
+            fields:
+              - { name: adresse, label: Adresse, widget: string }
+              - { name: zeiten, label: Öffnungszeiten, widget: string }
+          - name: sprechzeiten
+            label: Sprechzeiten des Bürgermeisters
+            widget: list
+            fields:
+              - { name: ort, label: Ort, widget: string }
+              - { name: zeit, label: Zeit, widget: string }
+          - { name: github, label: Link zum Quellcode (GitHub), widget: string, required: false }
