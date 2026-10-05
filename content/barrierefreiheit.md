@@ -1,7 +1,6 @@
 ---
 title: Erklärung zur Barrierefreiheit
 ---
-<div class="hinweis"><strong>Entwurf:</strong> Diese Erklärung enthält Platzhalter (in eckigen Klammern), die vor Veröffentlichung ausgefüllt bzw. geprüft werden müssen – insbesondere das Datum der Prüfung.</div>
 
 Die Gemeinde Tiddische ist bemüht, ihre Website im Einklang mit dem Niedersächsischen Behindertengleichstellungsgesetz (NBGG) und der Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) zur Umsetzung der Richtlinie (EU) 2016/2102 barrierefrei zugänglich zu machen.
 
@@ -23,7 +22,7 @@ Die nachstehend aufgeführten Inhalte sind aus folgenden Gründen nicht oder nur
 - **PDF-Dokumente:** Ein Teil der bereitgestellten PDF-Dokumente (insbesondere ältere Satzungen, Bebauungspläne und eingescannte Unterlagen) ist nicht vollständig barrierefrei, da sie teilweise als Scan vorliegen und nicht maschinenlesbar sind. Diese Dokumente stammen überwiegend aus Bestandsbeständen. Bei Bedarf stellen wir die Inhalte auf Anfrage in einer zugänglichen Form zur Verfügung.
 - **Historische Fotos und Bildcollagen** sind teilweise nur summarisch beschrieben.
 
-Diese Erklärung wurde am **[Datum einsetzen]** auf Grundlage einer Selbstbewertung erstellt.
+Diese Erklärung wurde am **05.10.2026** auf Grundlage einer Selbstbewertung erstellt.
 
 ## Feedback und Kontaktangaben
 
