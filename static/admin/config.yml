@@ -11,7 +11,7 @@ backend:
   name: github
   repo: gemeinde-tiddische/website   # ← ANPASSEN
   branch: main
-  base_url: https://sveltia-cms-auth.workers.dev   # ← ANPASSEN
+  base_url: https://sveltia-cms-auth.gemeinde-ccd.workers.dev   # ← ANPASSEN
   commit_messages:
     create: "Inhalt erstellt: {{collection}} – {{slug}}"
     update: "Inhalt geändert: {{collection}} – {{slug}}"
