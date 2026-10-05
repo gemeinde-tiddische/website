@@ -1,0 +1,14 @@
+{{ $start := .Params.start | time }}
+<article class="karte termin{{ if lt $start now }} vergangen{{ end }}">
+  <div class="datumsblock" aria-hidden="true">
+    <span class="tag">{{ $start.Format "2." }}</span>
+    <span class="monat">{{ index (slice "Jan" "Feb" "Mär" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez") (sub (int ($start.Format "1")) 1) }}</span>
+  </div>
+  <div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="meta">
+      {{ partial "datum-zeitraum.html" . }}
+      {{ with .Params.ort }}<br>{{ . }}{{ end }}
+    </p>
+  </div>
+</article>

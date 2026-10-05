@@ -1,0 +1,10 @@
+{{ $g := .Site.Data.gemeinde }}
+<aside class="infokasten" aria-label="Sprechzeiten und Öffnungszeiten">
+  <h2>Sprechzeiten des Bürgermeisters</h2>
+  <ul>
+    {{ range $g.sprechzeiten }}<li>{{ .ort }}: {{ .zeit }}</li>{{ end }}
+  </ul>
+  <h2>Gemeindebüro</h2>
+  <p>{{ $g.gemeindebuero.adresse }}<br>{{ $g.gemeindebuero.zeiten }}</p>
+  <p><a href="/kontakt/">Alle Kontaktinformationen →</a></p>
+</aside>

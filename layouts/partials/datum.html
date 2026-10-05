@@ -1,0 +1,2 @@
+{{- $monate := slice "Januar" "Februar" "März" "April" "Mai" "Juni" "Juli" "August" "September" "Oktober" "November" "Dezember" -}}
+{{- .Format "2." }} {{ index $monate (sub (int (.Format "1")) 1) }} {{ .Format "2006" -}}

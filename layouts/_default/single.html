@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="inhalt">
+  <article>
+    <header class="seitenkopf">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.untertitel }}<p class="untertitel">{{ . }}</p>{{ end }}
+    </header>
+    <div class="prosa">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+{{ end }}

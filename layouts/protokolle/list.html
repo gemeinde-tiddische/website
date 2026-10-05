@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="prosa">{{ .Content }}</div>
+
+  {{ $alle := .RegularPages.ByDate.Reverse }}
+  {{ if $alle }}
+    {{ range $alle.GroupByDate "2006" }}
+    <section class="abschnitt" style="margin-top:1.75rem">
+      <h2>{{ .Key }}</h2>
+      <ul class="pdf-liste">
+        {{ range .Pages }}
+        {{ partial "pdf-link.html" (dict "pfad" .Params.pdf "titel" .Title "info" (printf "Sitzung vom %s" (partial "datum.html" .Date))) }}
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+  {{ else }}
+  <p class="hinweis">Hier werden künftig die Niederschriften der öffentlichen Gemeinderatssitzungen veröffentlicht. Zurzeit sind noch keine Protokolle eingestellt.</p>
+  {{ end }}
+</div>
+{{ end }}

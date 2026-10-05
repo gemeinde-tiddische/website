@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="inhalt">
+
+  <section class="held">
+    <div>
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+      <p style="margin-top:1.25rem">
+        <a class="knopf" href="/gemeinde/">Mehr über die Gemeinde</a>
+        <a class="knopf knopf-zart" href="/kontakt/" style="margin-left:.4rem">Kontakt</a>
+      </p>
+    </div>
+    <img class="held-wappen" src="/images/wappen.png" alt="Wappen der Gemeinde Tiddische: von Rot und Gold gespalten, ein Mühlenrad über blauem Wellenschildfuß, begleitet von zwei Brotlaiben">
+  </section>
+
+  <div class="startraster">
+    <div>
+      {{/* Kommende Veranstaltungen */}}
+      {{ $kommend := where (where .Site.RegularPages "Section" "veranstaltungen") "Params.start" "ge" (now.Format "2006-01-02T15:04:05") }}
+      <section class="abschnitt" style="margin-top:0" aria-labelledby="t-veranstaltungen">
+        <div class="abschnitt-kopf">
+          <h2 id="t-veranstaltungen">Nächste Veranstaltungen</h2>
+          <a href="/veranstaltungen/">Alle Veranstaltungen →</a>
+        </div>
+        {{ with first 3 ($kommend.ByParam "start") }}
+        <div class="kartenraster" style="grid-template-columns:1fr">
+          {{ range . }}{{ partial "termin-karte.html" . }}{{ end }}
+        </div>
+        {{ else }}
+        <p>Zurzeit sind keine kommenden Veranstaltungen eingetragen.</p>
+        {{ end }}
+      </section>
+
+      {{/* Aktuelles */}}
+      <section class="abschnitt" aria-labelledby="t-aktuelles">
+        <div class="abschnitt-kopf">
+          <h2 id="t-aktuelles">Aktuelles</h2>
+          <a href="/aktuelles/">Alle Meldungen →</a>
+        </div>
+        <ul class="beitragsliste" style="margin-top:-.5rem">
+          {{ range first 3 (where .Site.RegularPages "Section" "aktuelles") }}
+          <li>
+            <h3 style="font-size:1.08rem"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "datum.html" .Date }}</time></p>
+            <p>{{ .Summary | plainify | truncate 160 }}</p>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+    </div>
+
+    <div>
+      {{ partial "zeiten-kasten.html" . }}
+    </div>
+  </div>
+
+</div>
+{{ end }}

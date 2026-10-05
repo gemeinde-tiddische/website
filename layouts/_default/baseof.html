@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="sprung-link" href="#hauptinhalt">Zum Inhalt springen</a>
+
+  <div class="wappenband" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="{{ "/" | relURL }}">
+        <img src="/images/wappen.png" alt="" width="44" height="52">
+        <span class="marke-name">Gemeinde Tiddische
+          <span class="marke-zusatz">Tiddische &amp; Hoitlingen · Samtgemeinde Brome</span>
+        </span>
+      </a>
+
+      <button class="nav-schalter" aria-expanded="false" aria-controls="hauptnav">Menü</button>
+
+      <nav class="hauptnav" id="hauptnav" aria-label="Hauptnavigation">
+        <ul>
+          {{ $current := . }}
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+
+      <button class="thema-schalter" aria-label="Zwischen hellem und dunklem Design wechseln" title="Helles/dunkles Design">
+        <span class="sonne" aria-hidden="true">☀</span>
+        <span class="mond" aria-hidden="true">☾</span>
+      </button>
+
+    </div>
+  </header>
+
+  <main id="hauptinhalt">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="fuss">
+    {{ partial "fuss.html" . }}
+  </footer>
+
+  <script>
+    (function () {
+      // Menü auf-/zuklappen (Mobil)
+      var schalter = document.querySelector(".nav-schalter");
+      var nav = document.getElementById("hauptnav");
+      if (schalter && nav) {
+        schalter.addEventListener("click", function () {
+          var offen = nav.classList.toggle("offen");
+          schalter.setAttribute("aria-expanded", offen ? "true" : "false");
+        });
+      }
+      // Hell/Dunkel umschalten
+      var thema = document.querySelector(".thema-schalter");
+      if (thema) {
+        thema.addEventListener("click", function () {
+          var html = document.documentElement;
+          var neu = html.dataset.theme === "dark" ? "light" : "dark";
+          html.dataset.theme = neu;
+          try { localStorage.setItem("thema", neu); } catch (e) {}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

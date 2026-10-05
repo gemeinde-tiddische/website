@@ -1,0 +1,46 @@
+{{ $g := .Site.Data.gemeinde }}
+<div class="fuss-innen">
+  <div>
+    <h2>Gemeinde Tiddische</h2>
+    <address>
+      {{ range split (trim $g.postadresse "\n") "\n" }}{{ . }}<br>{{ end }}
+      Telefon: <a href="tel:{{ replace $g.telefon " " "" }}">{{ $g.telefon }}</a><br>
+      E-Mail: <a href="mailto:{{ $g.email }}">{{ $g.email }}</a>
+    </address>
+  </div>
+  <div>
+    <h2>Sprechzeiten &amp; Öffnungszeiten</h2>
+    <ul>
+      {{ range $g.sprechzeiten }}
+      <li>Bürgermeister, {{ .ort }}:<br>{{ .zeit }}</li>
+      {{ end }}
+      <li>Gemeindebüro ({{ $g.gemeindebuero.adresse }}):<br>{{ $g.gemeindebuero.zeiten }}</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Seiten</h2>
+    <ul>
+      <li><a href="/gemeinde/">Über die Gemeinde</a></li>
+      <li><a href="/protokolle/">Ratsprotokolle</a></li>
+      <li><a href="/satzungen/">Satzungen</a></li>
+      <li><a href="https://www.samtgemeinde-brome.de/" rel="external">Samtgemeinde Brome</a></li>
+      <li><a href="/aktuelles/index.xml">RSS-Feed Aktuelles</a></li>
+      <li><a href="/veranstaltungen/index.xml">RSS-Feed Veranstaltungen</a></li>
+    </ul>
+  </div>
+  <div>
+    <h2>Rechtliches</h2>
+    <ul>
+      <li><a href="/impressum/">Impressum</a></li>
+      <li><a href="/datenschutz/">Datenschutz</a></li>
+      <li><a href="/barrierefreiheit/">Erklärung zur Barrierefreiheit</a></li>
+    </ul>
+  </div>
+</div>
+<div class="fuss-zeile">
+  <div class="inhalt-zeile">
+    © {{ now.Year }} Gemeinde Tiddische ·
+    {{ with $g.github }}<a href="{{ . }}" rel="external">Quellcode dieser Website</a> · {{ end }}
+    Erstellt mit <a href="https://gohugo.io/" rel="external">Hugo</a>
+  </div>
+</div>

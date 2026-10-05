@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+    <p class="untertitel">Bekanntmachungen, Einladungen und Neuigkeiten aus der Gemeinde.
+       <a href="index.xml">Als RSS-Feed abonnieren</a>.</p>
+  </header>
+  {{ $seite := .Paginate .RegularPages }}
+  <ul class="beitragsliste">
+    {{ range $seite.Pages }}
+    <li>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "datum.html" .Date }}</time></p>
+      <p>{{ .Summary | plainify | truncate 200 }}</p>
+    </li>
+    {{ else }}
+    <li>Zurzeit gibt es keine Meldungen.</li>
+    {{ end }}
+  </ul>
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

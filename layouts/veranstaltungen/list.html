@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="inhalt">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+    <p class="untertitel">Termine in Tiddische und Hoitlingen.
+       <a href="index.xml">Als RSS-Feed abonnieren</a>.</p>
+  </header>
+  {{ $jetzt := now.Format "2006-01-02T15:04:05" }}
+  {{ $kommend := where .RegularPages "Params.start" "ge" $jetzt }}
+  {{ $vergangen := where .RegularPages "Params.start" "lt" $jetzt }}
+
+  <section aria-labelledby="t-kommend">
+    <h2 id="t-kommend" style="margin-bottom:1rem">Kommende Veranstaltungen</h2>
+    {{ with $kommend.ByParam "start" }}
+    <div class="kartenraster">
+      {{ range . }}{{ partial "termin-karte.html" . }}{{ end }}
+    </div>
+    {{ else }}
+    <p>Zurzeit sind keine kommenden Veranstaltungen eingetragen.</p>
+    {{ end }}
+  </section>
+
+  {{ with first 6 ($vergangen.ByParam "start").Reverse }}
+  <section class="abschnitt" aria-labelledby="t-vergangen">
+    <h2 id="t-vergangen" style="margin-bottom:1rem">Vergangene Veranstaltungen</h2>
+    <div class="kartenraster">
+      {{ range . }}{{ partial "termin-karte.html" . }}{{ end }}
+    </div>
+  </section>
+  {{ end }}
+</div>
+{{ end }}

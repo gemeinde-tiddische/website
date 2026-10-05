@@ -1,0 +1,8 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <header class="seitenkopf"><h1>{{ .Title }}</h1></header>
+  <div class="prosa">{{ .Content }}</div>
+  <ul class="pdf-liste">{{ partial "pdf-link.html" (dict "pfad" .Params.pdf "titel" .Title "info" .Params.stand) }}</ul>
+  <p><a href="/satzungen/">← Alle Satzungen</a></p>
+</div>
+{{ end }}

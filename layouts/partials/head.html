@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ $titel := .Title }}
+{{ if .IsHome }}{{ $titel = printf "%s · Offizielle Website" .Site.Title }}{{ else }}{{ $titel = printf "%s · %s" .Title .Site.Title }}{{ end }}
+<title>{{ $titel }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.beschreibung }}{{ end }}">
+<link rel="icon" href="/images/favicon.ico" sizes="32x32">
+<link rel="icon" href="/images/wappen.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/wappen.png">
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Theme-Bootstrap: verhindert Aufblitzen des falschen Farbschemas */}}
+<script>
+  (function () {
+    var t;
+    try { t = localStorage.getItem("thema"); } catch (e) {}
+    if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+<link rel="preload" href="/fonts/AtkinsonHyperlegible-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/Bitter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+{{ with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Title }} · {{ $.Site.Title }}" href="{{ .Permalink }}">
+{{ end }}
+{{ if not .IsHome }}{{ with .Site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }} – Alle Beiträge" href="{{ .Permalink }}">
+{{ end }}{{ end }}
+
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ $titel }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.beschreibung }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ "images/wappen.png" | absURL }}">

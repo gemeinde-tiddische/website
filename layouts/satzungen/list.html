@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="prosa">{{ .Content }}</div>
+  <ul class="pdf-liste">
+    {{ range .RegularPages.ByWeight }}
+    {{ partial "pdf-link.html" (dict "pfad" .Params.pdf "titel" .Title "info" .Params.stand) }}
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

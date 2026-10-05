@@ -1,0 +1,20 @@
+{{- $start := .Params.start | time -}}
+{{- $monate := slice "Januar" "Februar" "März" "April" "Mai" "Juni" "Juli" "August" "September" "Oktober" "November" "Dezember" -}}
+{{- $tage := slice "Sonntag" "Montag" "Dienstag" "Mittwoch" "Donnerstag" "Freitag" "Samstag" -}}
+{{- $sm := index $monate (sub (int ($start.Format "1")) 1) -}}
+{{- $st := index $tage (int $start.Weekday) -}}
+{{- if .Params.ende -}}
+  {{- $ende := .Params.ende | time -}}
+  {{- $em := index $monate (sub (int ($ende.Format "1")) 1) -}}
+  {{- if eq ($start.Format "2006-01-02") ($ende.Format "2006-01-02") -}}
+    {{ $st }}, {{ $start.Format "2." }} {{ $sm }} {{ $start.Format "2006" }}, {{ $start.Format "15:04" }} – {{ $ende.Format "15:04" }} Uhr
+  {{- else -}}
+    {{ $start.Format "2." }} {{ $sm }} – {{ $ende.Format "2." }} {{ $em }} {{ $ende.Format "2006" }}
+  {{- end -}}
+{{- else -}}
+  {{- if eq ($start.Format "15:04") "00:00" -}}
+    {{ $st }}, {{ $start.Format "2." }} {{ $sm }} {{ $start.Format "2006" }}
+  {{- else -}}
+    {{ $st }}, {{ $start.Format "2." }} {{ $sm }} {{ $start.Format "2006" }}, {{ $start.Format "15:04" }} Uhr
+  {{- end -}}
+{{- end -}}

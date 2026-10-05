@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <article>
+    <header class="seitenkopf">
+      <h1>{{ .Title }}</h1>
+      <p class="artikel-meta">Veröffentlicht am <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "datum.html" .Date }}</time></p>
+    </header>
+    {{ with .Params.bild }}<img class="artikel-bild" src="{{ . }}" alt="{{ $.Params.bild_alt | default "" }}">{{ end }}
+    <div class="prosa">{{ .Content }}</div>
+    {{ with .Params.pdf }}
+    <ul class="pdf-liste">{{ partial "pdf-link.html" (dict "pfad" . "titel" ($.Params.pdf_titel | default "Dokument herunterladen")) }}</ul>
+    {{ end }}
+    <p style="margin-top:2rem"><a href="/aktuelles/">← Alle Meldungen</a></p>
+  </article>
+</div>
+{{ end }}

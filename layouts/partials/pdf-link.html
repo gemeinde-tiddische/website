@@ -1,0 +1,15 @@
+{{/* Erwartet dict mit "pfad" (z.B. /pdfs/satzungen/x.pdf) und "titel", optional "info" */}}
+{{ $pfad := .pfad }}
+{{ $groesse := "" }}
+{{ with os.Stat (printf "static%s" $pfad) }}
+  {{ $kb := div .Size 1024 }}
+  {{ if ge $kb 1024 }}{{ $groesse = printf "%.1f MB" (div (float .Size) 1048576) }}{{ else }}{{ $groesse = printf "%d KB" $kb }}{{ end }}
+{{ end }}
+<li class="pdf-eintrag">
+  <a href="{{ $pfad }}" type="application/pdf">
+    <span class="pdf-symbol" aria-hidden="true">PDF</span>
+    <span class="pdf-titel">{{ .titel }}
+      <span class="pdf-info">{{ with .info }}{{ . }} · {{ end }}{{ $groesse }}</span>
+    </span>
+  </a>
+</li>

@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="inhalt">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.untertitel }}<p class="untertitel">{{ . }}</p>{{ end }}
+  </header>
+  <div class="prosa">{{ .Content }}</div>
+
+  {{ range $ort := slice "Tiddische" "Hoitlingen" }}
+  {{ $im_ort := where $.RegularPages "Params.ortschaft" $ort }}
+  {{ with $im_ort.ByWeight }}
+  <section class="abschnitt" aria-labelledby="t-{{ $ort | lower }}">
+    <div class="abschnitt-kopf"><h2 id="t-{{ $ort | lower }}">Vereine in {{ $ort }}</h2></div>
+    <div class="vereinsraster">
+      {{ range . }}
+      <article class="verein">
+        <div class="bildrahmen">
+          {{ with .Params.bild }}<img src="{{ . }}" alt="" loading="lazy">{{ else }}<img src="/images/wappen.png" alt="" style="width:56px;height:auto;object-fit:contain">{{ end }}
+        </div>
+        <div class="verein-text">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.kontakt }}<p class="meta">{{ . }}</p>{{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}

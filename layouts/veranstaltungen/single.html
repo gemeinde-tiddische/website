@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <article>
+    <header class="seitenkopf">
+      <h1>{{ .Title }}</h1>
+      <p class="artikel-meta">
+        <strong>{{ partial "datum-zeitraum.html" . }}</strong>
+        {{ with .Params.ort }}<br>{{ . }}{{ end }}
+        {{ with .Params.veranstalter }}<br>Veranstalter: {{ . }}{{ end }}
+      </p>
+    </header>
+    {{ with .Params.bild }}<img class="artikel-bild" src="{{ . }}" alt="{{ $.Params.bild_alt | default "" }}">{{ end }}
+    <div class="prosa">{{ .Content }}</div>
+    {{ with .Params.pdf }}
+    <ul class="pdf-liste">{{ partial "pdf-link.html" (dict "pfad" . "titel" ($.Params.pdf_titel | default "Weitere Informationen (PDF)")) }}</ul>
+    {{ end }}
+    <p style="margin-top:2rem"><a href="/veranstaltungen/">← Alle Veranstaltungen</a></p>
+  </article>
+</div>
+{{ end }}

@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="inhalt inhalt-schmal">
+  <article>
+    <header class="seitenkopf">
+      <h1>{{ .Title }}</h1>
+      <p class="untertitel">Verein in {{ .Params.ortschaft }}</p>
+    </header>
+    {{ with .Params.bild }}<img class="artikel-bild" src="{{ . }}" alt="{{ $.Params.bild_alt | default "" }}" style="max-height:320px;object-fit:cover;width:100%">{{ end }}
+
+    <div class="kontaktblock">
+      <h2 style="font-size:1.05rem;margin-bottom:.4rem">Kontakt</h2>
+      {{ with .Params.kontakt }}<p>{{ . }}</p>{{ end }}
+      {{ with .Params.telefon }}<p>Telefon: {{ . }}</p>{{ end }}
+      {{ with .Params.email }}<p>E-Mail: <a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+      {{ with .Params.website }}<p>Website: <a href="{{ . }}" rel="external">{{ . | replaceRE "^https?://" "" | strings.TrimSuffix "/" }}</a></p>{{ end }}
+    </div>
+
+    <div class="prosa">{{ .Content }}</div>
+    <p style="margin-top:2rem"><a href="/vereine/">← Alle Vereine</a></p>
+  </article>
+</div>
+{{ end }}

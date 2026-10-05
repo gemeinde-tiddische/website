@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="inhalt">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="prosa">{{ .Content }}</div>
+
+  <section class="abschnitt" aria-labelledby="t-mitglieder">
+    <div class="abschnitt-kopf"><h2 id="t-mitglieder">Ratsmitglieder</h2></div>
+    {{ $rat := site.GetPage "ratsmitglieder" }}
+    <div class="personenraster">
+      {{ range $rat.RegularPages.ByWeight }}
+      <div class="person">
+        <img src="{{ .Params.foto | default "/images/avatars/portrait_placeholder.png" }}" alt="{{ if .Params.foto }}Porträtfoto von {{ .Title }}{{ else }}{{ end }}" width="92" height="92" loading="lazy">
+        <div class="name">{{ .Title }}</div>
+        {{ with .Params.funktion }}<div class="rolle">{{ . }}</div>{{ end }}
+        {{ with .Params.partei }}<div class="partei">{{ . }}</div>{{ end }}
+        {{ with .Params.email }}<div class="kontaktzeile"><a href="mailto:{{ . }}">{{ . }}</a></div>{{ end }}
+        {{ with .Params.telefon }}<div class="kontaktzeile">Tel.: {{ . }}</div>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-labelledby="t-dokumente">
+    <div class="abschnitt-kopf"><h2 id="t-dokumente">Dokumente des Rates</h2></div>
+    <div class="kartenraster">
+      <article class="karte">
+        <h3><a href="/protokolle/">Sitzungsprotokolle</a></h3>
+        <p class="vorschau">Niederschriften der öffentlichen Gemeinderatssitzungen.</p>
+      </article>
+      <article class="karte">
+        <h3><a href="/satzungen/">Satzungen</a></h3>
+        <p class="vorschau">Geltende Satzungen und Gebührenordnungen der Gemeinde.</p>
+      </article>
+    </div>
+  </section>
+</div>
+{{ end }}
