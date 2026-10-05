@@ -1,7 +1,6 @@
 ---
 title: Datenschutzerklärung
 ---
-<div class="hinweis"><strong>Entwurf:</strong> Diese Datenschutzerklärung wurde für den technischen Aufbau dieser Website vorbereitet und sollte vor Veröffentlichung durch die Gemeinde bzw. den Datenschutzbeauftragten der Samtgemeinde geprüft werden.</div>
 
 ## 1. Verantwortlicher
 
