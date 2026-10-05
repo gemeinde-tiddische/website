@@ -6,33 +6,7 @@ Hoitlingen, Samtgemeinde Brome, Landkreis Gifhorn) –
 
 Statische Website, erstellt mit [Hugo](https://gohugo.io/), gehostet bei
 Netlify, Inhaltspflege über [Sveltia CMS](https://github.com/sveltia/sveltia-cms)
-unter `/admin/`. Laufende Kosten: nur die Domain.
-
-## Leitprinzip
-
-> **Die Website muss ohne eine bestimmte Person funktionieren.**
-
-Deshalb: öffentlicher Quellcode, Standard-Werkzeuge statt Eigenbau,
-festgepinnte Versionen, Inhaltspflege ohne Technikkenntnisse, vollständige
-Dokumentation. Konten (GitHub-Organisation, Netlify, Cloudflare) gehören
-der Gemeinde, nicht einer Einzelperson.
-
-## Dokumentation
-
-| Datei | Für wen | Inhalt |
-|---|---|---|
-| **[ANLEITUNG.md](ANLEITUNG.md)** | Redakteur:innen (nicht-technisch) | Meldungen, Termine, Protokolle, Ratsmitglieder pflegen |
-| **[EINRICHTUNG.md](EINRICHTUNG.md)** | Technische Betreuung | Einmalige Einrichtung, Redakteure verwalten, Wartung, Notfall-Wiederherstellung |
-
-## Schnellstart (lokale Vorschau)
-
-```bash
-# Hugo "extended" installieren – Version siehe netlify.toml
-git clone https://github.com/gemeinde-tiddische/website.git
-cd website
-hugo server
-# → http://localhost:1313
-```
+unter `/admin/`.
 
 ## Projektstruktur
 
