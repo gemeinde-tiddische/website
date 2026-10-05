@@ -1,0 +1,575 @@
+/* ════════════════════════════════════════════════════════════
+   Gemeinde Tiddische · Stylesheet
+   Farbsystem abgeleitet aus dem Gemeindewappen:
+   Rot #ed0209 · Gold #ffc700 · Blau #223e9d
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Schriften (selbst gehostet, DSGVO-konform) ── */
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Bitter";
+  src: url("/fonts/Bitter-Variable.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+/* ── Farb- und Design-Token ── */
+:root {
+  --rot: #ed0209;
+  --gold: #ffc700;
+  --blau: #223e9d;
+
+  --bg: #f9f7f2;
+  --flaeche: #ffffff;
+  --tinte: #1d2433;
+  --tinte-2: #525a6b;
+  --linie: #e4dfd3;
+  --linie-stark: #cfc8b8;
+  --akzent: #1d3787;          /* Blau, für Text leicht abgedunkelt */
+  --akzent-flaeche: #eef1fb;
+  --rot-text: #c00208;
+  --fokus: #1d3787;
+  --schatten: 0 1px 2px rgb(29 36 51 / .06), 0 4px 14px rgb(29 36 51 / .05);
+
+  --schrift: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --schrift-titel: "Bitter", Georgia, serif;
+  --radius: 10px;
+  --inhalt-breite: 71rem;
+  --text-breite: 44rem;
+}
+
+[data-theme="dark"] {
+  --bg: #14171f;
+  --flaeche: #1c212c;
+  --tinte: #e9e7e0;
+  --tinte-2: #a6abb8;
+  --linie: #2b3140;
+  --linie-stark: #3b4254;
+  --akzent: #a8baf5;
+  --akzent-flaeche: #232b42;
+  --rot-text: #ff8a85;
+  --fokus: var(--gold);
+  --schatten: 0 1px 2px rgb(0 0 0 / .3), 0 4px 14px rgb(0 0 0 / .25);
+  color-scheme: dark;
+}
+
+/* ── Basis ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--schrift);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tinte);
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--schrift-titel);
+  font-weight: 650;
+  line-height: 1.25;
+  margin: 0 0 .6em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); }
+h3 { font-size: 1.18rem; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--akzent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 3px solid var(--fokus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+img { max-width: 100%; height: auto; }
+
+hr { border: 0; border-top: 1px solid var(--linie); margin: 2rem 0; }
+
+::selection { background: var(--gold); color: #1d2433; }
+
+/* ── Sprung-Link (Barrierefreiheit) ── */
+.sprung-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--blau);
+  color: #fff;
+  padding: .6rem 1rem;
+  z-index: 100;
+  border-radius: 0 0 var(--radius) 0;
+}
+.sprung-link:focus { left: 0; }
+
+/* ── Wappenband: das Erkennungszeichen der Seite ── */
+.wappenband {
+  display: flex;
+  height: 5px;
+}
+.wappenband span { flex: 1; }
+.wappenband span:nth-child(1) { background: var(--rot); }
+.wappenband span:nth-child(2) { background: var(--gold); }
+.wappenband span:nth-child(3) { background: var(--blau); }
+
+/* ── Kopfbereich ── */
+.kopf {
+  background: var(--flaeche);
+  border-bottom: 1px solid var(--linie);
+}
+.kopf-innen {
+  max-width: var(--inhalt-breite);
+  margin: 0 auto;
+  padding: .85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.marke {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  text-decoration: none;
+  color: var(--tinte);
+  margin-right: auto;
+}
+.marke img { width: 44px; height: auto; }
+.marke-name {
+  font-family: var(--schrift-titel);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.marke-zusatz {
+  display: block;
+  font-family: var(--schrift);
+  font-weight: 400;
+  font-size: .78rem;
+  color: var(--tinte-2);
+  letter-spacing: .02em;
+}
+
+/* Navigation */
+.nav-schalter {
+  display: none;
+  background: none;
+  border: 1px solid var(--linie-stark);
+  border-radius: var(--radius);
+  padding: .45rem .8rem;
+  font: inherit;
+  color: var(--tinte);
+  cursor: pointer;
+}
+.hauptnav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem;
+  margin: 0;
+  padding: 0;
+}
+.hauptnav a {
+  display: block;
+  padding: .5rem .75rem;
+  text-decoration: none;
+  color: var(--tinte);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: .95rem;
+}
+.hauptnav a:hover { background: var(--akzent-flaeche); color: var(--akzent); }
+.hauptnav a[aria-current="page"],
+.hauptnav a[aria-current="true"] {
+  color: var(--akzent);
+  box-shadow: inset 0 -3px 0 var(--gold);
+  border-radius: 8px 8px 0 0;
+}
+
+.thema-schalter {
+  background: none;
+  border: 1px solid var(--linie-stark);
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--tinte);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.thema-schalter:hover { background: var(--akzent-flaeche); }
+.thema-schalter .mond { display: none; }
+[data-theme="dark"] .thema-schalter .sonne { display: none; }
+[data-theme="dark"] .thema-schalter .mond { display: block; }
+
+@media (max-width: 56rem) {
+  .nav-schalter { display: block; order: 2; }
+  .thema-schalter { order: 3; }
+  .hauptnav { display: none; flex-basis: 100%; order: 4; }
+  .hauptnav.offen { display: block; }
+  .hauptnav ul { flex-direction: column; padding-top: .5rem; border-top: 1px solid var(--linie); }
+  .hauptnav a { padding: .7rem .5rem; }
+  .hauptnav a[aria-current="page"] { box-shadow: inset 4px 0 0 var(--gold); border-radius: 0 8px 8px 0; padding-left: .9rem; }
+}
+
+/* ── Seitenraster ── */
+.inhalt {
+  max-width: var(--inhalt-breite);
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem 3.5rem;
+}
+.inhalt-schmal { max-width: var(--text-breite); }
+
+.seitenkopf { margin-bottom: 1.75rem; }
+.seitenkopf .untertitel { color: var(--tinte-2); font-size: 1.05rem; max-width: var(--text-breite); }
+
+/* ── Startseite ── */
+.held {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2.5rem 0 2.75rem;
+}
+.held h1 { margin-bottom: .4em; }
+.held p { font-size: 1.15rem; max-width: 38rem; color: var(--tinte-2); }
+.held-wappen { width: clamp(110px, 16vw, 170px); filter: drop-shadow(0 6px 16px rgb(29 36 51 / .18)); }
+@media (max-width: 40rem) {
+  .held { grid-template-columns: 1fr; padding-top: 1.5rem; }
+  .held-wappen { order: -1; width: 96px; }
+}
+
+.knopf {
+  display: inline-block;
+  background: var(--blau);
+  color: #fff;
+  font-weight: 700;
+  padding: .65rem 1.15rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 0;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.knopf:hover { background: #1a2f78; }
+[data-theme="dark"] .knopf { background: var(--akzent); color: #11152b; }
+[data-theme="dark"] .knopf:hover { background: #bccaf8; }
+.knopf-zart {
+  background: transparent;
+  color: var(--akzent);
+  border: 1.5px solid var(--linie-stark);
+}
+.knopf-zart:hover { background: var(--akzent-flaeche); }
+[data-theme="dark"] .knopf-zart { background: transparent; color: var(--akzent); }
+
+/* Abschnittsüberschriften mit Linie */
+.abschnitt { margin-top: 2.75rem; }
+.abschnitt-kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid var(--linie);
+  padding-bottom: .4rem;
+  margin-bottom: 1.25rem;
+}
+.abschnitt-kopf h2 { margin: 0; }
+.abschnitt-kopf a { font-size: .92rem; font-weight: 700; white-space: nowrap; }
+
+/* ── Karten ── */
+.kartenraster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.1rem;
+}
+.karte {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--schatten);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  position: relative;
+}
+.karte h3 { margin: 0; font-size: 1.08rem; }
+.karte h3 a { color: inherit; text-decoration: none; }
+.karte h3 a::after { content: ""; position: absolute; inset: 0; }
+.karte h3 a:hover { color: var(--akzent); }
+.karte:has(h3 a:hover) { border-color: var(--linie-stark); }
+.karte .meta { color: var(--tinte-2); font-size: .9rem; }
+.karte .vorschau { color: var(--tinte-2); font-size: .95rem; margin: 0; }
+
+/* Termin-Datum */
+.termin { display: flex; gap: .95rem; }
+.datumsblock {
+  flex: none;
+  width: 3.6rem;
+  text-align: center;
+  background: var(--akzent-flaeche);
+  border-radius: 8px;
+  padding: .45rem .2rem .5rem;
+  border-top: 3px solid var(--gold);
+  align-self: flex-start;
+}
+.datumsblock .tag {
+  display: block;
+  font-family: var(--schrift-titel);
+  font-weight: 750;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: var(--akzent);
+}
+.datumsblock .monat {
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--tinte-2);
+}
+
+.vergangen { opacity: .72; }
+
+/* ── Infokasten (Sprechzeiten etc.) ── */
+.infokasten {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.25rem;
+}
+.infokasten h2, .infokasten h3 { font-size: 1.02rem; margin-bottom: .35rem; }
+.infokasten p, .infokasten ul { margin: 0 0 .9rem; font-size: .95rem; }
+.infokasten ul { padding-left: 1.1rem; }
+.infokasten > :last-child { margin-bottom: 0; }
+
+.startraster {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(15rem, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 56rem) { .startraster { grid-template-columns: 1fr; } }
+
+/* ── Listen: Aktuelles ── */
+.beitragsliste { list-style: none; margin: 0; padding: 0; }
+.beitragsliste li {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--linie);
+}
+.beitragsliste h3 { margin-bottom: .15rem; }
+.beitragsliste .meta { color: var(--tinte-2); font-size: .88rem; }
+.beitragsliste p { margin: .35rem 0 0; color: var(--tinte-2); }
+
+/* ── PDF-Zeilen ── */
+.pdf-liste { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: .6rem; }
+.pdf-eintrag a {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: .75rem .95rem;
+  text-decoration: none;
+  color: var(--tinte);
+}
+.pdf-eintrag a:hover { border-color: var(--akzent); }
+.pdf-eintrag .pdf-symbol {
+  flex: none;
+  width: 2.1rem; height: 2.1rem;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--rot) 12%, var(--flaeche));
+  color: var(--rot-text);
+  border-radius: 8px;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+.pdf-eintrag .pdf-titel { font-weight: 700; }
+.pdf-eintrag .pdf-info { color: var(--tinte-2); font-size: .85rem; display: block; font-weight: 400; }
+
+/* ── Ratsmitglieder ── */
+.personenraster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: 1.1rem;
+}
+.person {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 1.1rem .9rem .95rem;
+  text-align: center;
+  box-shadow: var(--schatten);
+}
+.person img {
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--linie);
+  margin-bottom: .55rem;
+}
+.person .name { font-weight: 700; line-height: 1.3; }
+.person .rolle { color: var(--akzent); font-size: .85rem; font-weight: 700; }
+.person .partei { color: var(--tinte-2); font-size: .82rem; }
+.person .kontaktzeile { font-size: .82rem; margin-top: .3rem; word-break: break-word; }
+
+/* ── Vereine ── */
+.vereinsraster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.1rem;
+}
+.verein {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--schatten);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.verein .bildrahmen {
+  aspect-ratio: 16 / 10;
+  background: var(--akzent-flaeche);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.verein .bildrahmen img { width: 100%; height: 100%; object-fit: cover; }
+.verein .verein-text { padding: .9rem 1.05rem 1rem; }
+.verein h3 { font-size: 1.05rem; margin-bottom: .2rem; }
+.verein h3 a { color: inherit; text-decoration: none; }
+.verein h3 a::after { content: ""; position: absolute; inset: 0; }
+.verein h3 a:hover { color: var(--akzent); }
+.verein .meta { color: var(--tinte-2); font-size: .88rem; margin: 0; }
+
+.kontaktblock {
+  background: var(--akzent-flaeche);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1.25rem 0;
+}
+.kontaktblock p { margin: .15rem 0; }
+
+/* ── Inhalts-Typografie (Artikel, Seiten) ── */
+.prosa { max-width: var(--text-breite); }
+.prosa img { border-radius: var(--radius); margin: .5rem 0 1rem; }
+.prosa h2 { margin-top: 1.8em; padding-bottom: .25rem; border-bottom: 2px solid var(--linie); }
+.prosa h3 { margin-top: 1.5em; }
+.prosa ul, .prosa ol { padding-left: 1.4rem; }
+.prosa li { margin-bottom: .35rem; }
+.prosa blockquote {
+  margin: 1.25rem 0;
+  padding: .25rem 0 .25rem 1.1rem;
+  border-left: 4px solid var(--gold);
+  color: var(--tinte-2);
+  font-style: italic;
+}
+.prosa table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+.prosa th, .prosa td { border: 1px solid var(--linie); padding: .5rem .7rem; text-align: left; }
+.prosa th { background: var(--akzent-flaeche); }
+
+.artikel-meta { color: var(--tinte-2); font-size: .92rem; margin-bottom: 1.5rem; }
+.artikel-bild { border-radius: var(--radius); box-shadow: var(--schatten); margin-bottom: 1.5rem; max-width: var(--text-breite); }
+
+/* ── Hinweisbanner ── */
+.hinweis {
+  background: color-mix(in srgb, var(--gold) 16%, var(--flaeche));
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--linie));
+  border-radius: var(--radius);
+  padding: .85rem 1.1rem;
+  margin: 1rem 0;
+  font-size: .95rem;
+}
+
+/* ── Blätterfunktion ── */
+.blaettern {
+  display: flex;
+  justify-content: center;
+  gap: .35rem;
+  margin-top: 2rem;
+  list-style: none;
+  padding: 0;
+}
+.blaettern a, .blaettern span {
+  display: block;
+  min-width: 2.3rem;
+  text-align: center;
+  padding: .4rem .55rem;
+  border: 1px solid var(--linie);
+  border-radius: 8px;
+  text-decoration: none;
+}
+.blaettern .aktiv { background: var(--blau); color: #fff; border-color: var(--blau); }
+[data-theme="dark"] .blaettern .aktiv { background: var(--akzent); color: #11152b; border-color: var(--akzent); }
+
+/* ── Fußbereich ── */
+.fuss {
+  margin-top: 3rem;
+  background: var(--flaeche);
+  border-top: 1px solid var(--linie);
+}
+.fuss-innen {
+  max-width: var(--inhalt-breite);
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 2rem 2.5rem;
+  font-size: .92rem;
+}
+.fuss h2 { font-size: .95rem; font-family: var(--schrift); letter-spacing: .04em; text-transform: uppercase; color: var(--tinte-2); margin-bottom: .65rem; }
+.fuss ul { list-style: none; margin: 0; padding: 0; }
+.fuss li { margin-bottom: .4rem; }
+.fuss a { color: var(--tinte); }
+.fuss a:hover { color: var(--akzent); }
+.fuss address { font-style: normal; line-height: 1.55; }
+.fuss-zeile {
+  border-top: 1px solid var(--linie);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  color: var(--tinte-2);
+  font-size: .85rem;
+}
+.fuss-zeile .inhalt-zeile { max-width: var(--inhalt-breite); margin: 0 auto; }
+
+/* ── 404 ── */
+.fehlerseite { text-align: center; padding: 4rem 1rem; }
+.fehlerseite .gross { font-family: var(--schrift-titel); font-size: 5rem; font-weight: 750; color: var(--linie-stark); line-height: 1; }
+
+/* ── Druck ── */
+@media print {
+  .kopf, .fuss, .wappenband, .thema-schalter, .nav-schalter { display: none; }
+  body { background: #fff; color: #000; }
+}
