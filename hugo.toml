@@ -1,0 +1,65 @@
+baseURL = "https://www.gemeinde-tiddische.de/"
+languageCode = "de-DE"
+title = "Gemeinde Tiddische"
+timeZone = "Europe/Berlin"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+rssLimit = 20
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  beschreibung = "Offizielle Website der Gemeinde Tiddische mit den Ortschaften Tiddische und Hoitlingen – Samtgemeinde Brome, Landkreis Gifhorn."
+
+[menus]
+  [[menus.main]]
+    name = "Aktuelles"
+    pageRef = "/aktuelles"
+    weight = 10
+  [[menus.main]]
+    name = "Veranstaltungen"
+    pageRef = "/veranstaltungen"
+    weight = 20
+  [[menus.main]]
+    name = "Gemeinderat"
+    pageRef = "/gemeinderat"
+    weight = 30
+  [[menus.main]]
+    name = "Vereine"
+    pageRef = "/vereine"
+    weight = 40
+  [[menus.main]]
+    name = "Dorfregion"
+    pageRef = "/dorfregion"
+    weight = 50
+  [[menus.main]]
+    name = "Bauen"
+    pageRef = "/bauen"
+    weight = 60
+  [[menus.main]]
+    name = "Kontakt"
+    pageRef = "/kontakt"
+    weight = 70
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[privacy]
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[server]
+  [[server.headers]]
+    for = "/**"
+    [server.headers.values]
+      X-Frame-Options = "SAMEORIGIN"

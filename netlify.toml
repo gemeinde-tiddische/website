@@ -1,0 +1,136 @@
+# ─────────────────────────────────────────────────────────────
+# Netlify-Konfiguration · Gemeinde Tiddische
+# Die Hugo-Version ist absichtlich festgepinnt, damit der Build
+# auch in Jahren noch identisch funktioniert. Zum Aktualisieren:
+# siehe EINRICHTUNG.md → "Hugo aktualisieren".
+# ─────────────────────────────────────────────────────────────
+
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.147.9"
+  TZ = "Europe/Berlin"
+
+[context.deploy-preview]
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+# ── Weiterleitungen von den alten URLs (Stand: alte Website 2026) ──
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/aktuelles.html"
+  to = "/aktuelles/"
+  status = 301
+
+[[redirects]]
+  from = "/veranstaltungen.html"
+  to = "/veranstaltungen/"
+  status = 301
+
+[[redirects]]
+  from = "/dorfregion.html"
+  to = "/dorfregion/"
+  status = 301
+
+[[redirects]]
+  from = "/vereine.html"
+  to = "/vereine/"
+  status = 301
+
+[[redirects]]
+  from = "/ratsmitglieder.html"
+  to = "/gemeinderat/"
+  status = 301
+
+[[redirects]]
+  from = "/bauen.html"
+  to = "/bauen/"
+  status = 301
+
+[[redirects]]
+  from = "/satzungen.html"
+  to = "/satzungen/"
+  status = 301
+
+[[redirects]]
+  from = "/kontakt.html"
+  to = "/kontakt/"
+  status = 301
+
+[[redirects]]
+  from = "/impressum.html"
+  to = "/impressum/"
+  status = 301
+
+[[redirects]]
+  from = "/gemeinde.html"
+  to = "/gemeinde/"
+  status = 301
+
+# Alte Vereins-Detailseiten → Vereinsübersicht
+[[redirects]]
+  from = "/verein*"
+  to = "/vereine/"
+  status = 301
+
+# Alte PDF-Pfade → neue, bereinigte Pfade
+[[redirects]]
+  from = "/pdfs/Satzungen/Hundesteuersatzung.pdf"
+  to = "/pdfs/satzungen/hundesteuersatzung.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdfs/Satzungen/07_Hebesatzsatzung.pdf"
+  to = "/pdfs/satzungen/hebesatzsatzung.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdfs/Satzungen/4_Aenderung_Gebuehrensatzung_Benutzung_Buergerhaus.pdf"
+  to = "/pdfs/satzungen/gebuehrensatzung-buergerhaus.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdfs/Bebauungsplaene Tiddische.pdf"
+  to = "/pdfs/bauen/bebauungsplaene-tiddische.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdfs/Bebauungsplaene Hoitlingen.pdf"
+  to = "/pdfs/bauen/bebauungsplaene-hoitlingen.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdfs/bplan_urschrift.pdf"
+  to = "/pdfs/bauen/bplan-am-sportplatz-hoitlingen-urschrift.pdf"
+  status = 301
+
+# ── Sicherheits-Header ──
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Das CMS soll nicht in Suchmaschinen auftauchen
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# Schriften und Bilder lange cachen (Dateinamen ändern sich bei Updates)
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
