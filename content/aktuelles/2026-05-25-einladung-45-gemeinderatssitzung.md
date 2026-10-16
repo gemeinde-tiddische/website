@@ -1,6 +1,6 @@
 ---
 title: Einladung zur 49. Gemeinderatssitzung
-date: 2026-10-16
+date: 2026-10-15
 bild: ''
 bild_alt: ''
 pdf: ''
