@@ -1,0 +1,4 @@
+# Hugo-Build-Ergebnisse (werden bei jeder Veröffentlichung neu erzeugt)
+/public/
+/resources/
+.hugo_build.lock

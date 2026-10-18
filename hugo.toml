@@ -6,6 +6,11 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 rssLimit = 20
 
+# Beiträge mit Datum in der Zukunft trotzdem sofort veröffentlichen.
+# Eine statische Website baut sich am Stichtag nicht von selbst neu –
+# ohne diese Einstellung bliebe so ein Beitrag einfach unsichtbar.
+buildFuture = true
+
 [pagination]
   pagerSize = 10
 

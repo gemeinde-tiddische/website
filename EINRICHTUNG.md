@@ -10,8 +10,8 @@ wiederkehrenden Wartungsaufgaben. Ziel: Jede technisch versierte Person
 | Baustein | Dienst | Kosten | Zweck |
 |---|---|---|---|
 | Quellcode & Inhalte | GitHub (öffentliches Repository) | 0 € | Speichert alles; jede Änderung ist protokolliert |
-| Website-Generator | Hugo (Version in `netlify.toml` festgepinnt) | 0 € | Baut aus den Inhalten statische HTML-Seiten |
-| Hosting | Netlify (Free Plan) | 0 € | Baut bei jeder Änderung automatisch neu und liefert die Seiten aus |
+| Website-Generator | Hugo (Version in `.github/workflows/website.yml` festgepinnt) | 0 € | Baut aus den Inhalten statische HTML-Seiten |
+| Hosting | GitHub Pages + GitHub Actions | 0 € | Baut bei jeder Änderung automatisch neu und liefert die Seiten aus (kostenlos für öffentliche Repositories, ohne Begrenzung der Veröffentlichungen) |
 | Inhaltsverwaltung | Sveltia CMS (`/admin/`) | 0 € | Web-Oberfläche für Redakteure, schreibt direkt ins Repository |
 | CMS-Anmeldung | Cloudflare Worker (sveltia-cms-auth) | 0 € | Vermittelt den GitHub-Login für das CMS |
 | Domain | gemeinde-tiddische.de (+ gemeinde-hoitlingen.de) | ~10 €/Jahr | Einziger Kostenpunkt; zahlt die Gemeinde |
@@ -43,36 +43,53 @@ Website besteht aus statischen Dateien.
    git push -u origin main
    ```
 
-### 2. Netlify einrichten
+### 2. GitHub Pages aktivieren
 
-1. Auf netlify.com ein Konto anlegen – **per „Sign up with GitHub"** mit
-   einem Konto der Organisation.
-2. **Add new site → Import an existing project → GitHub** →
-   `gemeinde-tiddische/website` auswählen.
-3. Die Build-Einstellungen werden automatisch aus `netlify.toml` gelesen
-   (Hugo-Version, Befehl, Verzeichnis) – nichts ändern, **Deploy** klicken.
-4. Nach 1–2 Minuten ist die Seite unter einer `*.netlify.app`-Adresse
-   erreichbar. Alles prüfen.
-5. **Team-Zugang:** Unter Team settings eine zweite Person einladen
-   (gleiches Prinzip wie bei GitHub).
+1. Repository → **Settings → Pages** → „Build and deployment" →
+   Source: **GitHub Actions**.
+2. Mehr ist nicht einzustellen: Die Datei `.github/workflows/website.yml`
+   baut und veröffentlicht die Seite bei jeder Änderung auf `main`.
+3. Reiter **Actions** im Repository öffnen: Der Lauf „Website
+   veröffentlichen" muss nach 1–2 Minuten einen grünen Haken zeigen.
+   Falls noch kein Lauf existiert: „Website veröffentlichen" →
+   **Run workflow**.
 
 ### 3. Domain verbinden
 
-1. Netlify → Site → **Domain management → Add custom domain** →
-   `www.gemeinde-tiddische.de` (und `gemeinde-tiddische.de` als Redirect
-   auf www).
-2. Beim bisherigen Domain-Anbieter die von Netlify angezeigten DNS-Einträge
-   setzen (CNAME für www auf die Netlify-Adresse, A/ALIAS für die
-   Hauptdomain auf Netlifys Load Balancer – Netlify zeigt die genauen
-   Werte an).
-3. HTTPS aktiviert Netlify automatisch (Let's Encrypt), sobald die
-   DNS-Einträge greifen.
-4. `gemeinde-hoitlingen.de`: ebenfalls als Domain-Alias hinzufügen oder
-   beim Registrar eine Weiterleitung auf www.gemeinde-tiddische.de
-   einrichten.
+> **Reihenfolge beachten:** Domain immer **zuerst in GitHub** eintragen,
+> **dann** DNS ändern – sonst könnte jemand anderes die Domain auf GitHub
+> für sich beanspruchen.
 
-> **Hinweis Domainwechsel:** Erst die neue Seite vollständig prüfen, dann
-> die DNS-Einträge umstellen. Die alte Website bleibt bis dahin erreichbar.
+1. **Domain für die Organisation verifizieren** (Schutz vor Übernahme):
+   Organisation → **Settings → Pages → Add a domain** →
+   `gemeinde-tiddische.de` → den angezeigten TXT-Eintrag
+   (`_github-pages-challenge-gemeinde-tiddische.gemeinde-tiddische.de`)
+   beim Domain-Anbieter anlegen → **Verify**. Den TXT-Eintrag dauerhaft
+   stehen lassen.
+2. Repository → **Settings → Pages → Custom domain**:
+   `www.gemeinde-tiddische.de` → **Save**. (Die Meldung „DNS check
+   unsuccessful" ist normal, bis Schritt 3 erledigt ist.)
+3. Beim Domain-Anbieter die DNS-Einträge setzen und **alle alten Einträge
+   für `@` und `www` entfernen**:
+
+   | Name | Typ | Wert |
+   |---|---|---|
+   | `@` | A | `185.199.108.153` |
+   | `@` | A | `185.199.109.153` |
+   | `@` | A | `185.199.110.153` |
+   | `@` | A | `185.199.111.153` |
+   | `@` | AAAA | `2606:50c0:8000::153` |
+   | `@` | AAAA | `2606:50c0:8001::153` |
+   | `@` | AAAA | `2606:50c0:8002::153` |
+   | `@` | AAAA | `2606:50c0:8003::153` |
+   | `www` | CNAME | `gemeinde-tiddische.github.io` |
+
+4. Sobald der DNS-Check in den Pages-Einstellungen grün ist (Minuten bis
+   max. 24 Stunden): **Enforce HTTPS** aktivieren. GitHub leitet
+   `gemeinde-tiddische.de` automatisch auf `www` um.
+5. `gemeinde-hoitlingen.de`: GitHub Pages bedient nur eine Domain pro
+   Website. Beim Domain-Anbieter eine **Weiterleitung** auf
+   `https://www.gemeinde-tiddische.de` einrichten.
 
 ### 4. CMS-Anmeldung einrichten (OAuth-Worker)
 
@@ -107,7 +124,7 @@ Kurzfassung:
       Samtgemeinde gegenlesen lassen.
 - [ ] In `data/gemeinde.yaml` den GitHub-Link prüfen.
 - [ ] „Zugangs-Zettel" fürs Gemeindebüro erstellen: GitHub-Org-Owner-Konto,
-      Netlify-Konto, Cloudflare-Konto, Domain-Registrar – je mit
+      Cloudflare-Konto, Domain-Registrar – je mit
       Benutzername, hinterlegter E-Mail und Hinweis auf den Passwort-Ort.
 - [ ] Alte Website-Hosting kündigen (erst nach erfolgreichem Umzug!).
 
@@ -141,9 +158,10 @@ erlischt damit automatisch.
 bei Bedarf:
 
 ### Hugo aktualisieren
-Nur nötig, wenn neue Funktionen gebraucht werden. In `netlify.toml` die
-`HUGO_VERSION` erhöhen, lokal testen (`hugo server`), committen. Bei
-Problemen: Versionsnummer einfach zurückdrehen.
+Nur nötig, wenn neue Funktionen gebraucht werden. In
+`.github/workflows/website.yml` die `HUGO_VERSION` erhöhen, lokal testen
+(`hugo server`), committen. Bei Problemen: Versionsnummer einfach
+zurückdrehen.
 
 ### Sveltia CMS
 `static/admin/index.html` lädt automatisch die aktuelle Version. Sollte
@@ -155,7 +173,8 @@ Notfall kann die Script-Zeile auch auf Decap umgestellt werden, die
 
 ### Lokale Vorschau (für größere Änderungen)
 ```bash
-# Hugo installieren: https://gohugo.io/installation/ (Version siehe netlify.toml)
+# Hugo "extended" installieren: https://gohugo.io/installation/
+# (Version siehe .github/workflows/website.yml)
 git clone https://github.com/gemeinde-tiddische/website.git
 cd website
 hugo server          # Vorschau unter http://localhost:1313
@@ -164,11 +183,20 @@ Das CMS kann lokal ohne Anmeldung getestet werden: `hugo server` starten,
 dann http://localhost:1313/admin/ öffnen und „Work with Local Repository"
 wählen (Chrome/Edge).
 
+### Änderungen erscheinen nicht online?
+Reiter **Actions** im Repository öffnen. Jede Änderung erzeugt dort einen
+Lauf „Website veröffentlichen":
+- **Grüner Haken:** Die Änderung ist online (ggf. Browser-Cache leeren).
+- **Rotes X:** Lauf anklicken – die Fehlermeldung steht im Protokoll des
+  fehlgeschlagenen Schritts. Nach der Korrektur startet automatisch ein
+  neuer Lauf; ein Lauf lässt sich auch mit „Re-run jobs" wiederholen.
+- **Gar kein Lauf:** Settings → Pages prüfen (Source muss „GitHub Actions"
+  sein) und ob Actions für das Repository erlaubt sind.
+
 ### Etwas ist kaputtgegangen?
 Jede Änderung ist ein Git-Commit. Auf GitHub unter „Commits" die letzte
-funktionierende Version finden → „Revert" → Netlify baut automatisch die
-reparierte Fassung. Alternativ in Netlify unter „Deploys" einen früheren
-Deploy mit einem Klick wiederherstellen („Publish deploy").
+funktionierende Version finden → „Revert" → die reparierte Fassung wird
+automatisch neu gebaut und veröffentlicht.
 
 ---
 
@@ -185,5 +213,17 @@ Deploy mit einem Klick wiederherstellen („Publish deploy").
   27 MB komprimiert (Originale liegen bei der Gemeinde/Samtgemeinde).
 - **Hugo-Version festgepinnt** – verhindert, dass ein automatisches Update
   den Build bricht.
+- **GitHub Pages statt Netlify** (Umstellung Oktober 2026): Netlifys
+  kostenloser Plan rechnet mit Credits – jede Veröffentlichung kostet 15
+  von 300 Credits pro Monat, also höchstens rund 20 Speicherungen im CMS.
+  Danach werden Änderungen nicht mehr veröffentlicht und die Seite wird
+  schließlich abgeschaltet. Für eine von Laien gepflegte Seite ungeeignet.
+- **Weiterleitungen alter Adressen** laufen über die Fehlerseite
+  (`layouts/404.html`, Liste in `data/weiterleitungen.yaml`), weil
+  GitHub Pages keine Weiterleitungen auf dem Server kennt. Eigene
+  HTTP-Header sind auf GitHub Pages ebenfalls nicht möglich.
+- **`buildFuture = true`** (`hugo.toml`): Beiträge mit Datum in der Zukunft
+  erscheinen sofort. Eine statische Seite baut sich am Stichtag nicht von
+  selbst neu – ohne diese Einstellung blieben solche Beiträge unsichtbar.
 - **Ratsmitglieder erzeugen keine eigenen Unterseiten** (bewusst; sie
   erscheinen nur auf der Gemeinderats-Seite).

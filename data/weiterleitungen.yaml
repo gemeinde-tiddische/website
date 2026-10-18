@@ -1,0 +1,31 @@
+# ─────────────────────────────────────────────
+# Weiterleitungen von alten Adressen auf neue
+#
+# GitHub Pages kennt keine Weiterleitungen auf dem Server. Wer eine
+# dieser alten Adressen aufruft, landet auf der Fehlerseite (404) und
+# wird von dort sofort zur neuen Adresse weitergeleitet.
+#
+# Neue Weiterleitung: eine Zeile ergänzen –  "/alte/adresse": /neue/adresse/
+# Alte Vereins-Unterseiten (/verein1t.html usw.) führen automatisch
+# zur Vereinsübersicht (siehe layouts/404.html).
+# ─────────────────────────────────────────────
+
+# Seiten der alten Website (bis 2026)
+"/aktuelles.html": /aktuelles/
+"/veranstaltungen.html": /veranstaltungen/
+"/dorfregion.html": /dorfregion/
+"/vereine.html": /vereine/
+"/ratsmitglieder.html": /gemeinderat/
+"/bauen.html": /bauen/
+"/satzungen.html": /satzungen/
+"/kontakt.html": /kontakt/
+"/impressum.html": /impressum/
+"/gemeinde.html": /gemeinde/
+
+# Dokumente der alten Website
+"/pdfs/Satzungen/Hundesteuersatzung.pdf": /pdfs/satzungen/hundesteuersatzung.pdf
+"/pdfs/Satzungen/07_Hebesatzsatzung.pdf": /pdfs/satzungen/hebesatzsatzung.pdf
+"/pdfs/Satzungen/4_Aenderung_Gebuehrensatzung_Benutzung_Buergerhaus.pdf": /pdfs/satzungen/gebuehrensatzung-buergerhaus.pdf
+"/pdfs/Bebauungsplaene Tiddische.pdf": /pdfs/bauen/bebauungsplaene-tiddische.pdf
+"/pdfs/Bebauungsplaene Hoitlingen.pdf": /pdfs/bauen/bebauungsplaene-hoitlingen.pdf
+"/pdfs/bplan_urschrift.pdf": /pdfs/bauen/bplan-am-sportplatz-hoitlingen-urschrift.pdf

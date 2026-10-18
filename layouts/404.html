@@ -1,4 +1,15 @@
 {{ define "main" }}
+<script>
+  // Alte Adressen sofort auf neue weiterleiten (Liste: data/weiterleitungen.yaml).
+  // Nötig, weil GitHub Pages keine Weiterleitungen auf dem Server kennt.
+  (function () {
+    var ziele = {{ site.Data.weiterleitungen | jsonify | safeJS }} || {};
+    var pfad = location.pathname;
+    try { pfad = decodeURIComponent(pfad); } catch (e) {}
+    var ziel = ziele[pfad] || (/^\/verein[^\/]*\.html$/.test(pfad) ? "/vereine/" : "");
+    if (ziel) location.replace(ziel + location.hash);
+  })();
+</script>
 <div class="inhalt fehlerseite">
   <div class="gross" aria-hidden="true">404</div>
   <h1>Seite nicht gefunden</h1>

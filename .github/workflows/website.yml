@@ -1,0 +1,66 @@
+# ─────────────────────────────────────────────────────────────
+# Website bauen und veröffentlichen (GitHub Pages)
+#
+# Läuft automatisch bei jeder Änderung auf "main" – also auch bei
+# jedem Speichern im CMS. Ergebnis und Fehlermeldungen: Reiter
+# "Actions" im Repository (grüner Haken = online, rotes X = Fehler).
+#
+# Die Hugo-Version ist absichtlich festgepinnt, damit der Build auch
+# in Jahren noch identisch funktioniert (siehe EINRICHTUNG.md).
+# ─────────────────────────────────────────────────────────────
+name: Website veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  # Erlaubt einen manuellen Neustart über "Actions" → "Run workflow"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Immer nur eine Veröffentlichung gleichzeitig; spätere Änderungen warten.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: "0.147.9"
+      TZ: Europe/Berlin
+    steps:
+      - name: Hugo installieren
+        run: |
+          curl -sSfL -o "${{ runner.temp }}/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+          hugo version
+
+      - name: Repository auschecken
+        uses: actions/checkout@v7
+
+      - name: GitHub Pages vorbereiten
+        uses: actions/configure-pages@v6
+
+      - name: Website bauen
+        run: hugo --gc --minify
+
+      - name: Ergebnis hochladen
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Auf GitHub Pages veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v5

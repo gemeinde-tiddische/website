@@ -16,9 +16,9 @@ Diese Website ist eine rein informierende Website. Sie verwendet **keine Cookies
 
 ## 3. Hosting
 
-Diese Website wird bei **Netlify, Inc.**, 512 2nd Street, Suite 200, San Francisco, CA 94107, USA gehostet. Beim Aufruf der Website verarbeitet Netlify technisch notwendige Daten (insbesondere die IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Browsertyp), um die Website ausliefern zu können und die Sicherheit des Betriebs zu gewährleisten (Server-Logfiles). Rechtsgrundlage ist Art. 6 Abs. 1 lit. e DSGVO (Wahrnehmung einer im öffentlichen Interesse liegenden Aufgabe – Öffentlichkeitsarbeit der Gemeinde) in Verbindung mit dem berechtigten Interesse an einem sicheren und stabilen Betrieb.
+Diese Website wird über **GitHub Pages** bereitgestellt, einen Dienst der **GitHub, Inc.**, 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA. Beim Aufruf der Website verarbeitet GitHub technisch notwendige Daten (insbesondere die IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Browsertyp), um die Website ausliefern zu können. Die IP-Adresse wird von GitHub zu Sicherheitszwecken protokolliert und gespeichert (Server-Logfiles). Rechtsgrundlage ist Art. 6 Abs. 1 lit. e DSGVO (Wahrnehmung einer im öffentlichen Interesse liegenden Aufgabe – Öffentlichkeitsarbeit der Gemeinde) in Verbindung mit dem berechtigten Interesse an einem sicheren und stabilen Betrieb.
 
-Netlify ist unter dem **EU-U.S. Data Privacy Framework** zertifiziert; die Übermittlung personenbezogener Daten in die USA erfolgt damit auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (Art. 45 DSGVO). Weitere Informationen: [Netlify Privacy Policy](https://www.netlify.com/privacy/).
+GitHub ist unter dem **EU-U.S. Data Privacy Framework** zertifiziert; die Übermittlung personenbezogener Daten in die USA erfolgt damit auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (Art. 45 DSGVO). Weitere Informationen: [Datenschutzerklärung von GitHub](https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement).
 
 ## 4. Lokale Speicherung (kein Tracking)
 
@@ -38,7 +38,7 @@ Diese Website enthält Links zu externen Websites (z. B. Vereine, Samtgemeinde B
 
 ## 8. Quellcode auf GitHub
 
-Der Quellcode dieser Website ist öffentlich auf GitHub einsehbar. Beim Besuch dieser Website selbst werden **keine Daten an GitHub übertragen**. Erst wenn Sie dem Link zum Quellcode folgen, gelten die Datenschutzbestimmungen von GitHub.
+Der Quellcode dieser Website ist öffentlich auf GitHub einsehbar. Wenn Sie dem Link zum Quellcode folgen, gelten die Datenschutzbestimmungen von GitHub.
 
 ## 9. Ihre Rechte
 
