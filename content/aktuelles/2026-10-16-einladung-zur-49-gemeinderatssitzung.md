@@ -20,7 +20,7 @@ Dorfgemeinschaftshaus Hoitlingen
 2. Genehmigung der Niederschrift vom 17.09.2026 – öffentlich
 3. Bericht des Bürgermeisters
 4. Einwohneranfragen (max. 15 Minuten)
-5. Beratung/Beschluss – Antrag SV Teutonia Tiddische auf Kostenübernahme bei der Entsorgung der Osterfeuerreste
+5. Beratung/Beschluss – Antrag SV Teutonia Tiddische auf Kostenübernahme der Entsorgung der Osterfeuerreste
 6. Beratung/Beschluss – Dorfentwicklungsplan Dorfregion MADKA
 7. Beratung/Beschluss – Straßenbeleuchtung; hier: Nachverdichtung Lichtpunkte Drömlingsweg und Gorering
 8. Beratung/Beschluss – Zurverfügungstellung des Festplatzes Hoitlingen (Parkplatz vor Sportheim Eischotter Straße) für Um- und Anbauvarianten Feuerwehrhaus Hoitlingen
