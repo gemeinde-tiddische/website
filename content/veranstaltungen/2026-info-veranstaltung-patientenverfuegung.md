@@ -8,7 +8,7 @@ veranstalter: Samtgemeinde Brome
 bild: ''
 bild_alt: ''
 pdf: /pdfs/veranstaltungen/Flyer Patientenverfügung Tiddische.pdf
-pdf_titel: Flyer Patientenverfügung
+pdf_titel: Flyer Vortrag Patientenverfügung Tiddische
 ---
 
 Vortrag einer spezialisierten Rechtsanwältin rund um das Thema Vorsorge. Im Mittelpunkt steht die **Patientenverfügung**.
