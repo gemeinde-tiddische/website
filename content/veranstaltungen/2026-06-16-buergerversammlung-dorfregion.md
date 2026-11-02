@@ -1,13 +1,17 @@
 ---
-title: "2. Bürgerversammlung – Dorfregion Mitten an der Kleinen Aller"
+title: 2. Bürgerversammlung – Dorfregion Mitten an der Kleinen Aller
 date: 2026-06-01
+expiryDate: 2026-11-01T23:59:59
 start: 2026-06-16T17:30:00
 ende: 2026-06-16T19:00:00
 ort: Gasthof zur Post, Bergfeld
 veranstalter: Dorfregion Mitten an der Kleinen Aller
 bild: /images/veranstaltungen/einladung-2-bv-madka.png
 bild_alt: Einladungsflyer zur 2. Bürgerversammlung der Dorfregion Mitten an der Kleinen Aller
+pdf: ''
+pdf_titel: Weitere Informationen (PDF)
 ---
+
 Nachdem der Dorfentwicklungsplan durch das Amt für regionale Landesentwicklung Braunschweig anerkannt wurde, beginnt nun die Förderphase.
 
 Auf der Bürgerversammlung erwartet Sie:
