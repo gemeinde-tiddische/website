@@ -1,6 +1,7 @@
 ---
 title: Info-Veranstaltung Patientenverfügung
 date: 2026-10-28
+expiryDate: 2026-11-11T23:59:59
 start: 2026-11-11T15:00:00
 ende: ''
 ort: Bürgerhaus Tiddische
