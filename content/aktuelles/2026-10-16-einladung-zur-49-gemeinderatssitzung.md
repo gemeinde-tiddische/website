@@ -1,6 +1,7 @@
 ---
 title: Einladung zur 1. Sitzung (konstituierende Sitzung) des Gemeinderates
 date: 2026-11-05
+expiryDate: 2026-11-16T23:59:59
 bild: ''
 bild_alt: ''
 pdf: ''
