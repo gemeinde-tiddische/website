@@ -44,7 +44,20 @@ collections:
     summary: "{{title}} ({{date}})"
     fields:
       - { name: title, label: Überschrift, widget: string }
-      - { name: date, label: Datum der Veröffentlichung, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - name: date
+        label: Veröffentlichen ab
+        widget: datetime
+        time_format: false
+        format: "YYYY-MM-DD"
+        default: "{{now}}"
+        hint: "Ab diesem Tag ist die Meldung auf der Website zu sehen; das Datum steht auch über der Meldung. Liegt es in der Zukunft, erscheint die Meldung an diesem Tag automatisch (kurz nach Mitternacht)."
+      - name: expiryDate
+        label: Veröffentlichen bis (optional)
+        widget: datetime
+        type: date
+        format: "YYYY-MM-DD[T23:59:59]"
+        required: false
+        hint: "Bis einschließlich zu diesem Tag sichtbar, danach wird die Meldung automatisch ausgeblendet. Sie bleibt hier gespeichert und kann später wiederverwendet werden. Leer lassen = unbegrenzt sichtbar."
       - name: bild
         label: Bild (optional)
         widget: image
@@ -80,7 +93,20 @@ collections:
     summary: "{{title}}"
     fields:
       - { name: title, label: Name der Veranstaltung, widget: string }
-      - { name: date, label: Veröffentlicht am, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Datum, an dem dieser Eintrag erstellt wurde (für die Sortierung im RSS-Feed)." }
+      - name: date
+        label: Veröffentlichen ab
+        widget: datetime
+        time_format: false
+        format: "YYYY-MM-DD"
+        default: "{{now}}"
+        hint: "Ab diesem Tag ist die Veranstaltung auf der Website zu sehen. Liegt es in der Zukunft, erscheint sie an diesem Tag automatisch (kurz nach Mitternacht)."
+      - name: expiryDate
+        label: Veröffentlichen bis (optional)
+        widget: datetime
+        type: date
+        format: "YYYY-MM-DD[T23:59:59]"
+        required: false
+        hint: "Bis einschließlich zu diesem Tag sichtbar, danach automatisch ausgeblendet – auch aus „Vergangene Veranstaltungen“. Der Eintrag bleibt hier gespeichert. Leer lassen = unbegrenzt sichtbar."
       - name: start
         label: Beginn
         widget: datetime
@@ -117,7 +143,7 @@ collections:
     summary: "{{title}} ({{date}})"
     fields:
       - { name: title, label: Titel, widget: string, hint: "z. B. „Protokoll der 45. Gemeinderatssitzung“" }
-      - { name: date, label: Datum der Sitzung, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - { name: date, label: Datum der Sitzung, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Ein Datum in der Zukunft blendet das Protokoll bis zu diesem Tag aus." }
       - name: pdf
         label: Protokoll als PDF
         widget: file
@@ -146,7 +172,7 @@ collections:
         public_folder: /pdfs/satzungen
       - { name: stand, label: "Stand (optional)", widget: string, required: false, hint: "z. B. „Stand: 14.12.2022“" }
       - { name: weight, label: Reihenfolge, widget: number, default: 50, hint: "Kleinere Zahl = weiter oben in der Liste." }
-      - { name: date, label: Datum, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Datum des Beschlusses oder der letzten Änderung." }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: "YYYY-MM-DD", hint: "Datum des Beschlusses oder der letzten Änderung. Ein Datum in der Zukunft blendet die Satzung bis zu diesem Tag aus." }
       - { name: body, label: Anmerkung (optional), widget: markdown, required: false }
 
   # ─────────────────────── Ratsmitglieder ───────────────────────

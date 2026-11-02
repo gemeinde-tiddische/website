@@ -2,8 +2,9 @@
 # Website bauen und veröffentlichen (GitHub Pages)
 #
 # Läuft automatisch bei jeder Änderung auf "main" – also auch bei
-# jedem Speichern im CMS. Ergebnis und Fehlermeldungen: Reiter
-# "Actions" im Repository (grüner Haken = online, rotes X = Fehler).
+# jedem Speichern im CMS – und zusätzlich jede Nacht (siehe "schedule").
+# Ergebnis und Fehlermeldungen: Reiter "Actions" im Repository
+# (grüner Haken = online, rotes X = Fehler).
 #
 # Die Hugo-Version ist absichtlich festgepinnt, damit der Build auch
 # in Jahren noch identisch funktioniert (siehe EINRICHTUNG.md).
@@ -13,6 +14,17 @@ name: Website veröffentlichen
 on:
   push:
     branches: [main]
+  # Jede Nacht neu bauen, damit „Veröffentlichen ab/bis“ aus dem CMS am
+  # Stichtag ohne Zutun greift. Der zweite Lauf am Morgen ist eine
+  # Absicherung, falls GitHub einen Lauf verzögert oder auslässt.
+  # Bewusst nicht zur vollen Stunde – dann ist GitHub am stärksten ausgelastet.
+  # Achtung: GitHub schaltet Zeitpläne in öffentlichen Repositories nach
+  # 60 Tagen ohne Änderungen ab (siehe EINRICHTUNG.md).
+  schedule:
+    - cron: "17 0 * * *"
+      timezone: "Europe/Berlin"
+    - cron: "17 5 * * *"
+      timezone: "Europe/Berlin"
   # Erlaubt einen manuellen Neustart über "Actions" → "Run workflow"
   workflow_dispatch:
 

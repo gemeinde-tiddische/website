@@ -192,6 +192,18 @@ Lauf „Website veröffentlichen":
   neuer Lauf; ein Lauf lässt sich auch mit „Re-run jobs" wiederholen.
 - **Gar kein Lauf:** Settings → Pages prüfen (Source muss „GitHub Actions"
   sein) und ob Actions für das Repository erlaubt sind.
+- **Eintrag ist gespeichert, aber nicht zu sehen:** „Veröffentlichen ab"
+  prüfen – ein Datum in der Zukunft blendet den Eintrag bis dahin aus
+  (gewollt, siehe Abschnitt E).
+
+### Zeitgesteuerte Veröffentlichung greift nicht mehr?
+Die nächtlichen Läufe stehen unter **Actions** mit dem Auslöser „schedule".
+**Wichtig:** GitHub schaltet Zeitpläne in öffentlichen Repositories ab,
+wenn 60 Tage lang keine Änderung im Repository passiert ist. Dann
+erscheinen bzw. verschwinden zeitgesteuerte Einträge erst beim nächsten
+Speichern im CMS. Wieder einschalten: **Actions** → links „Website
+veröffentlichen" → Hinweis oben → **Enable workflow**. Jede Speicherung im
+CMS zählt als Änderung – bei regelmäßiger Pflege tritt das also nicht auf.
 
 ### Etwas ist kaputtgegangen?
 Jede Änderung ist ein Git-Commit. Auf GitHub unter „Commits" die letzte
@@ -222,8 +234,16 @@ automatisch neu gebaut und veröffentlicht.
   (`layouts/404.html`, Liste in `data/weiterleitungen.yaml`), weil
   GitHub Pages keine Weiterleitungen auf dem Server kennt. Eigene
   HTTP-Header sind auf GitHub Pages ebenfalls nicht möglich.
-- **`buildFuture = true`** (`hugo.toml`): Beiträge mit Datum in der Zukunft
-  erscheinen sofort. Eine statische Seite baut sich am Stichtag nicht von
-  selbst neu – ohne diese Einstellung blieben solche Beiträge unsichtbar.
+- **Zeitgesteuertes Veröffentlichen** (seit November 2026): Bei Aktuelles
+  und Veranstaltungen heißt das Datumsfeld im CMS „Veröffentlichen ab"
+  (`date`), dazu kommt „Veröffentlichen bis" (`expiryDate`, gespeichert als
+  23:59:59 des gewählten Tages, also einschließlich). Hugo lässt Einträge mit
+  Zukunftsdatum und abgelaufene Einträge beim Bauen weg (`buildFuture` /
+  `buildExpired = false` in `hugo.toml`). Weil sich eine statische Seite
+  nicht von selbst ändert, baut der Workflow sie zusätzlich jede Nacht
+  um 0:17 und 5:17 Uhr neu (`schedule` in `.github/workflows/website.yml`).
+  Das gilt für alle Bereiche mit Datum – ein Protokoll mit Zukunftsdatum
+  wäre ebenfalls bis dahin ausgeblendet. Die Inhalte selbst sind im
+  öffentlichen Repository sofort einsehbar.
 - **Ratsmitglieder erzeugen keine eigenen Unterseiten** (bewusst; sie
   erscheinen nur auf der Gemeinderats-Seite).

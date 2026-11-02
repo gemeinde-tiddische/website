@@ -39,7 +39,10 @@ Typischer Fall: Einladung zu einer Ratssitzung.
 2. Oben auf **„Neuer Eintrag"** (bzw. „New Meldung") klicken.
 3. Ausfüllen:
    - **Überschrift**, z. B. „Einladung zur 46. Gemeinderatssitzung"
-   - **Datum der Veröffentlichung** (heute)
+   - **Veröffentlichen ab** steht automatisch auf heute. Ein späteres
+     Datum wählen, wenn die Meldung erst dann erscheinen soll.
+   - **Veröffentlichen bis** (optional): bis zu welchem Tag die Meldung
+     zu sehen sein soll (siehe Abschnitt 4).
    - **Inhalt**: der eigentliche Text. Mit der Werkzeugleiste können
      Überschriften, Aufzählungen und Links eingefügt werden.
    - Bei Bedarf ein **Bild** oder einen **PDF-Anhang** hochladen.
@@ -58,16 +61,49 @@ Die Meldung erscheint automatisch auf der Startseite und unter „Aktuelles".
      ohne feste Uhrzeit einfach 00:00 lassen)
    - **Ende** (optional, z. B. für „17–21 Uhr" oder mehrtägige Termine)
    - **Ort**, z. B. „Bürgerhaus Tiddische"
+   - **Veröffentlichen ab / bis** (optional, siehe Abschnitt 4)
 3. Speichern – fertig.
 
 Die Website sortiert Veranstaltungen **automatisch**: Kommende Termine
 erscheinen auf der Startseite und oben in der Übersicht; vergangene rutschen
 von selbst in den Bereich „Vergangene Veranstaltungen". **Es muss nichts
-gelöscht werden.**
+gelöscht werden.** Soll ein Termin danach ganz von der Website
+verschwinden, bei „Veröffentlichen bis" z. B. den Tag der Veranstaltung
+eintragen.
 
 ---
 
-## 4. Ein Sitzungsprotokoll veröffentlichen
+## 4. Zeitgesteuert veröffentlichen und ausblenden
+
+Meldungen und Veranstaltungen haben zwei Datumsfelder:
+
+- **Veröffentlichen ab:** Ab diesem Tag ist der Eintrag auf der Website zu
+  sehen. Liegt das Datum in der Zukunft, bleibt der Eintrag bis dahin
+  unsichtbar und erscheint dann **von selbst**. Bei Meldungen steht dieses
+  Datum auch über der Meldung.
+- **Veröffentlichen bis** (optional): Bis einschließlich zu diesem Tag ist
+  der Eintrag zu sehen, in der Nacht danach verschwindet er **von selbst**
+  von der Website. Leer lassen = unbegrenzt sichtbar.
+
+Ausgeblendete Einträge bleiben hier im Verwaltungsbereich gespeichert und
+lassen sich wiederverwenden: Eintrag öffnen, Text und Daten ändern,
+speichern.
+
+**Beispiel:** Die Einladung zur Ratssitzung am 16. November soll ab
+Donnerstag, 5. November, zu sehen sein und nach der Sitzung verschwinden:
+„Veröffentlichen ab" = 05.11., „Veröffentlichen bis" = 16.11.
+
+> **Gut zu wissen**
+> - Die Website wird jede Nacht automatisch neu erstellt. Ein Eintrag
+>   „ab Donnerstag" erscheint also Donnerstag kurz nach Mitternacht,
+>   spätestens am frühen Morgen.
+> - Ausgeblendet heißt: nicht auf der Website. Der Text ist trotzdem sofort
+>   im öffentlich einsehbaren Quellcode bei GitHub zu finden. Für
+>   Vertrauliches ist die Funktion daher nicht gedacht.
+
+---
+
+## 5. Ein Sitzungsprotokoll veröffentlichen
 
 1. Links auf **Sitzungsprotokolle** → **„Neuer Eintrag"**.
 2. **Titel** eintragen, z. B. „Protokoll der 45. Gemeinderatssitzung".
@@ -80,7 +116,7 @@ Die Protokolle werden auf der Website automatisch nach Jahren sortiert.
 
 ---
 
-## 5. Nach einer Kommunalwahl: Ratsmitglieder aktualisieren
+## 6. Nach einer Kommunalwahl: Ratsmitglieder aktualisieren
 
 1. Links auf **Ratsmitglieder**.
 2. Ausgeschiedene Mitglieder: Eintrag öffnen → **Löschen**.
@@ -94,7 +130,7 @@ Die Protokolle werden auf der Website automatisch nach Jahren sortiert.
 
 ---
 
-## 6. Weitere Bereiche
+## 7. Weitere Bereiche
 
 - **Vereine**: neue Vereine anlegen oder Ansprechpartner ändern.
   Bitte Kontaktdaten nur mit Einverständnis der jeweiligen Person
@@ -107,11 +143,15 @@ Die Protokolle werden auf der Website automatisch nach Jahren sortiert.
 
 ---
 
-## 7. Häufige Fragen
+## 8. Häufige Fragen
 
 **Wie lange dauert es, bis Änderungen online sind?**
 In der Regel 1–2 Minuten. Die Website wird nach jedem Speichern automatisch
-neu erstellt.
+neu erstellt. Ist die Änderung danach noch nicht zu sehen, die Seite mit
+**Strg + Umschalt + R** neu laden – der Browser zeigt sonst bis zu
+10 Minuten lang die zwischengespeicherte Fassung. Ausnahme: Einträge mit
+„Veröffentlichen ab" in der Zukunft erscheinen erst an diesem Tag
+(siehe Abschnitt 4).
 
 **Ich habe etwas falsch gemacht – ist das schlimm?**
 Nein. Jede Änderung wird dauerhaft protokolliert und kann von der

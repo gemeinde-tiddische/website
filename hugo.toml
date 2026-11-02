@@ -6,10 +6,13 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 rssLimit = 20
 
-# Beiträge mit Datum in der Zukunft trotzdem sofort veröffentlichen.
-# Eine statische Website baut sich am Stichtag nicht von selbst neu –
-# ohne diese Einstellung bliebe so ein Beitrag einfach unsichtbar.
-buildFuture = true
+# Zeitgesteuertes Veröffentlichen (CMS-Felder „Veröffentlichen ab“ = date,
+# „Veröffentlichen bis“ = expiryDate): Einträge mit Datum in der Zukunft und
+# abgelaufene Einträge werden beim Bauen weggelassen. Damit das am Stichtag
+# ohne Zutun greift, baut der Workflow die Seite zusätzlich jede Nacht neu
+# (siehe .github/workflows/website.yml). Gilt für alle Bereiche mit Datum.
+buildFuture = false
+buildExpired = false
 
 [pagination]
   pagerSize = 10

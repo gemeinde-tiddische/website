@@ -44,6 +44,8 @@
             <p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "datum.html" .Date }}</time></p>
             <p>{{ .Summary | plainify | truncate 160 }}</p>
           </li>
+          {{ else }}
+          <li>Zurzeit gibt es keine Meldungen.</li>
           {{ end }}
         </ul>
       </section>
