@@ -1,7 +1,9 @@
 ---
-title: Marco Langer
-weight: 30
+title: Sören Hoppe
 partei: SPD
 funktion: 2. stv. Bürgermeister
-foto: /images/avatars/marco_x.webp
+foto: ''
+email: ''
+telefon: ''
+weight: 30
 ---
