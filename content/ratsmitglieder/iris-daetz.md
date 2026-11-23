@@ -5,5 +5,5 @@ funktion: 1. stv. Bürgermeisterin
 foto: ''
 email: ''
 telefon: ''
-weight: 60
+weight: 20
 ---
