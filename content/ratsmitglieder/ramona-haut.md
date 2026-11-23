@@ -1,6 +1,9 @@
 ---
-title: Ramona Haut
-weight: 20
+title: Julia Vahldieck
 partei: SPD
-funktion: 1. stv. Bürgermeisterin
+funktion: Allgemeine Verwaltungsvertreterin
+foto: ''
+email: ''
+telefon: ''
+weight: 20
 ---
