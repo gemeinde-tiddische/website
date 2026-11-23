@@ -1,6 +1,9 @@
 ---
 title: Michael Krupke
-weight: 80
-partei: parteilos
+partei: CDU
+funktion: ''
 foto: /images/avatars/michael_krupke.webp
+email: ''
+telefon: ''
+weight: 80
 ---
