@@ -1,6 +1,9 @@
 ---
-title: Maurice Bove
+title: Dustin Krüger
+partei: CDU
+funktion: ''
+foto: ''
+email: ''
+telefon: ''
 weight: 50
-partei: parteilos
-foto: /images/avatars/bove_portrait.jpg
 ---
