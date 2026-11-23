@@ -5,5 +5,5 @@ funktion: ''
 foto: /images/avatars/michael_krupke.webp
 email: ''
 telefon: ''
-weight: 80
+weight: 70
 ---
