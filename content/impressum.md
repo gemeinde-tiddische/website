@@ -1,6 +1,7 @@
 ---
 title: Impressum
 ---
+
 ## Angaben gemäß § 5 DDG
 
 Gemeinde Tiddische
@@ -9,6 +10,8 @@ Am Sportplatz 11
 
 **Vertreten durch:**
 Bürgermeister Daniel Krause
+
+Steuernummer: 19/212/00283
 
 ## Kontakt
 
