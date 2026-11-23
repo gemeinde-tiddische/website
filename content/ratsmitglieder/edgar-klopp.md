@@ -1,5 +1,9 @@
 ---
 title: Edgar Klopp
-weight: 70
 partei: SPD
+funktion: ''
+foto: ''
+email: ''
+telefon: ''
+weight: 50
 ---
