@@ -1,5 +1,9 @@
 ---
 title: Heiko Lehn
-weight: 90
 partei: SPD
+funktion: ''
+foto: ''
+email: ''
+telefon: ''
+weight: 80
 ---
