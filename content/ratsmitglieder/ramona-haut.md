@@ -5,5 +5,5 @@ funktion: Allgemeine Verwaltungsvertreterin
 foto: ''
 email: ''
 telefon: ''
-weight: 20
+weight: 110
 ---
