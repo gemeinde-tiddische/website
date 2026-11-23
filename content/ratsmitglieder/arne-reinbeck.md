@@ -1,5 +1,9 @@
 ---
 title: Arne Reinbeck
-weight: 110
 partei: CDU
+funktion: ''
+foto: ''
+email: ''
+telefon: ''
+weight: 100
 ---
