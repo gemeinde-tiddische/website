@@ -1,6 +1,9 @@
 ---
 title: Michael Müller
-weight: 100
 partei: CDU
+funktion: ''
 foto: /images/avatars/michael_mueller.webp
+email: ''
+telefon: ''
+weight: 90
 ---
